@@ -34,3 +34,24 @@ at index 4 there's word eal and at index 6 there's word app
 currently only checked word would be ealapp because eal comes before
 but appeal could also be a combination
 A: when starting a new loop you have to loop from the start and and with an if statement skip if a word already added to localResult variable
+
+P: a lot of times the result has list<string> results of the exact same char; this makes me think that a lot of double work is being performed which isn't needed; e.g. in the input there's yonder and several times it finds combinations of yo+n+d+e+r; a problems arise from this:
+    - if it found yo+n+d+e+r the first time and now it has again found the combo yo+n+d+e (because there's duplicate strings) it has to go again through the whole list to find "r" another time while it has already been found
+        Solution would be to use Distinct() from LINQ to make sure there's no duplicate strings
+    but this got me thinking that there's a lot of combinations made that for example are not in the allowed combinations IEnumerable; e.g. you get an initial group of a+b+c and still have to loop through the whole list, but on the other in the allowed combinations you know there's no word that starts with "abc...", so why even go through the whole list it's a waste of time
+A: write a function that temporarly check if the current IEnumerable of string parts has a match with the allowed combinations and use distincy to remove all duplicate strings from input 
+
+PS this got me all thinking maybe i should subdivide possible combinations in all the different string types and check if those string types exist in different types; you can cut a string with length 6 into these different string lengths:
+    - 1+1+1+1+1+1
+    - 1+1+1+1+2
+    - 1+1+1+2+1
+    - 1+1+2+1+1
+    - 1+2+1+1+1
+    - 2+1+1+1+1
+    - 1+1+1+3
+    - 1+1+3+1
+    - 1+3+1+1
+    - 3+1+1+1
+    - etc.
+    this would probably improve performance a lot more
+    but focus now first on first method

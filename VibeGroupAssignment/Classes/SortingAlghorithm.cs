@@ -14,15 +14,16 @@ namespace VibeGroupAssignment.Classes
 
         public SortingAlghorithm(string[] input)
         {
-            this.AllowedCombinations = input.Where(x => x.Length == 6).Distinct().ToHashSet();
-            this.Input = input.Where(x => x.Length < 6).ToArray();
+            var delDuplicatesInput = input.Distinct();
+            this.AllowedCombinations = delDuplicatesInput.Where(x => x.Length == 6).ToHashSet();
+            this.Input = delDuplicatesInput.Where(x => x.Length < 6).ToArray();
         }
 
         public void FindCombinations()
         {
+            //Console.WriteLine($"There's currently {this.Input.Length} distinct entries in Input");
             for (int i = 0; i < Input.Length; i++)
             {
-                Console.WriteLine($"{Input[i]} with index around {i}");
                 var localResult = new Dictionary<int, string>();
                 localResult.Add(i, Input[i]);
                 byte count = (byte)(6 - Input[i].Length);
@@ -44,12 +45,12 @@ namespace VibeGroupAssignment.Classes
                     localResult.Add(i, this.Input[i]);
 
                     byte newCount = (byte)(count - this.Input[i].Length);
-
+                    string combinedString = String.Join("", localResult.Values);
                     if (newCount == 0)
                     {
                         // Check the combination
-                        string combinedString = String.Join("", localResult.Values);
-                        if (this.AllowedCombinations.Contains(combinedString))
+                        
+                        if (CheckIfSubstringExist(combinedString, newCount))
                         {
                             this.Results.Add(new List<string>(localResult.Values));
                         }
@@ -57,7 +58,12 @@ namespace VibeGroupAssignment.Classes
                     }
                     else
                     {
-                        LoopThroughLocalInput(newCount, localResult);
+                        if (CheckIfSubstringExist(combinedString, newCount))
+                        {
+                            //WriteCurrentWordLoop(localResult);
+
+                            LoopThroughLocalInput(newCount, localResult);
+                        }
                     }
                 }
                 else
@@ -68,6 +74,34 @@ namespace VibeGroupAssignment.Classes
                 localResult.Remove(localResult.Keys.Last());
 
             }
+        }
+
+        public bool CheckIfSubstringExist(string input, byte count)
+        {
+            foreach (var item in this.AllowedCombinations)
+            {
+                var subStr = item.Substring(0, 6 - count);
+                if (input == subStr)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        public void WriteCurrentWordLoop(Dictionary<int, string> localResult)
+        {
+            Console.Write("Currently looping through words { ");
+            foreach (var item in localResult)
+            {
+                Console.Write($"{item.Value} ");
+            }
+            Console.Write("} with index {");
+            foreach (var item in localResult)
+            {
+                Console.Write($"{item.Key} ");
+            }
+            Console.WriteLine("}");
         }
 
         public void showResults()
