@@ -11,12 +11,14 @@ namespace VibeGroupAssignment.Classes
         public string[] Input { get; }
         public HashSet<string> AllowedCombinations { get; }
         public List<List<string>> Results { get; set; } = new List<List<string>>();
+        public byte MaxLength { get; set; }
 
-        public SortingAlghorithm(string[] input)
+        public SortingAlghorithm(string[] input, byte length)
         {
             var delDuplicatesInput = input.Distinct();
-            this.AllowedCombinations = delDuplicatesInput.Where(x => x.Length == 6).ToHashSet();
-            this.Input = delDuplicatesInput.Where(x => x.Length < 6).ToArray();
+            this.MaxLength = length;
+            this.AllowedCombinations = delDuplicatesInput.Where(x => x.Length == MaxLength).ToHashSet();
+            this.Input = delDuplicatesInput.Where(x => x.Length < MaxLength).ToArray();
         }
 
         public void FindCombinations()
@@ -26,7 +28,7 @@ namespace VibeGroupAssignment.Classes
             {
                 var localResult = new Dictionary<int, string>();
                 localResult.Add(i, Input[i]);
-                byte count = (byte)(6 - Input[i].Length);
+                byte count = (byte)(Input[i].Length);
                 LoopThroughLocalInput(count, localResult);
             }
         }
@@ -40,29 +42,26 @@ namespace VibeGroupAssignment.Classes
                     continue;
                 }
 
-                if (count - this.Input[i].Length >= 0)
+                if (count + this.Input[i].Length <= this.MaxLength)
                 {
                     localResult.Add(i, this.Input[i]);
 
-                    byte newCount = (byte)(count - this.Input[i].Length);
+                    byte newCount = (byte)(count + this.Input[i].Length);
                     string combinedString = String.Join("", localResult.Values);
-                    if (newCount == 0)
+
+                    if (CheckIfSubstringExist(combinedString, newCount))
                     {
-                        // Check the combination
-                        
-                        if (CheckIfSubstringExist(combinedString, newCount))
+                        if (newCount == this.MaxLength)
                         {
                             this.Results.Add(new List<string>(localResult.Values));
-                        }
 
-                    }
-                    else
-                    {
-                        if (CheckIfSubstringExist(combinedString, newCount))
+                        }
+                        else
                         {
                             //WriteCurrentWordLoop(localResult);
 
                             LoopThroughLocalInput(newCount, localResult);
+
                         }
                     }
                 }
@@ -80,7 +79,7 @@ namespace VibeGroupAssignment.Classes
         {
             foreach (var item in this.AllowedCombinations)
             {
-                var subStr = item.Substring(0, 6 - count);
+                var subStr = item.Substring(0, count);
                 if (input == subStr)
                 {
                     return true;

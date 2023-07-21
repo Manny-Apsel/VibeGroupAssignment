@@ -8,7 +8,7 @@ namespace VibeGroupAssignmentTests
         [Fact]
         public void CreateInstanceFooBar()
         {
-            var sa = new SortingAlghorithm(new string[] {"foo", "bar", "foobar"});
+            var sa = new SortingAlghorithm(new string[] {"foo", "bar", "foobar"}, 6);
             Assert.NotEmpty(sa.Input);
             Assert.NotEmpty(sa.AllowedCombinations);
             Assert.Contains("bar", sa.Input);
@@ -18,7 +18,7 @@ namespace VibeGroupAssignmentTests
         [Fact]
         public void CreateInstanceBarFoo()
         {
-            var sa = new SortingAlghorithm(new string[] { "foo", "bar", "barfoo" });
+            var sa = new SortingAlghorithm(new string[] { "foo", "bar", "barfoo" }, 6);
             Assert.NotEmpty(sa.Input);
             Assert.NotEmpty(sa.AllowedCombinations);
             Assert.Contains("bar", sa.Input);
@@ -36,7 +36,7 @@ namespace VibeGroupAssignmentTests
 
         public void TestAlghorithmFoobar(params string[] input)
         {
-            var sa = new SortingAlghorithm(input);
+            var sa = new SortingAlghorithm(input, 6);
             sa.FindCombinations();
             Assert.Equal(new List<string>() { "foo", "bar" }, sa.Results.FirstOrDefault());
         }
@@ -51,7 +51,7 @@ namespace VibeGroupAssignmentTests
 
         public void TestAlghorithmBarfoo(params string[] input)
         {
-            var sa = new SortingAlghorithm(input);
+            var sa = new SortingAlghorithm(input, 6);
             sa.FindCombinations();
             Assert.Equal(new List<string>() { "bar", "foo" }, sa.Results.FirstOrDefault());
         }
