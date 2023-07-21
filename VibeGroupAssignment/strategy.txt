@@ -1,0 +1,36 @@
+- first get all words from txt file
+- filter all words to have 6 words => all acceptable results and put this in a dictionary data collection
+- filter all words according to sizes (1, 2, 3, 4, 5)
+
+- combine all combinatiosn for list with length 1 and 5, 2 and 4, 3 with 3
+- check if that combination are in the dictionary data collection -> if yes count them up so you also have an idea how many times that combination happens
+
+problems
+P: SorthingAlghtorim constructor filters list of strings into correct property field where each string is subdivided according to length, problem is dictionary can't hold keys with the same value, so you have to filter them out
+A: Distinct() from LINQ gives back IEnumerable with only distinct values.
+
+--------------------------------------------------
+
+rewrite strategy because it's not combinations of 2, but combinations of multiple strings
+
+- get all words from txt file
+- create hashset with all words with length 6 in input.txt
+- loop through all words from txt file
+- within loop keep a count of 6
+- add string to local string array and reduce string length of count until precisely 0, if under 0 you can't add string to local string array and have to continue to find the next one
+when it gets to 0, check if combined string is found in hashset, if yes => add to results, if not => remove last added string (LIFO) and continue the loop
+
+P: you can't know how many loops within loops to use, because all words from input.txt have different size
+A: You could subdivide all letters into their own list based on word length, but that would be a lot of codework and not replicable whenever you'd change alghorithm to find combinations with a word length other than 6
+=> you'd need to use a callback function where you pass down count and adjusted list as parameter, this all happens in the same class and whenever a combination is found you can add it 
+see: https://learn.microsoft.com/en-us/dotnet/framework/interop/how-to-implement-callback-functions
+    so apparently callbacks aren't called callbacks in c# but recursion functions 
+    difference between recursion and callback?
+    recursion references itself invokes itself another time, while a callback stores an executable code of a function to a value/reference pointer to be used somewhere else, obviously using callback would be better because you could use it in the whole program, but functionality doesn't demand it at the present thus it's not needed and we can use the recursion method
+
+P: currently combinations are only checked whenever index number of string parts are sorted in ascending number, for example:
+list has appeal as possible 6 letter word
+at index 4 there's word eal and at index 6 there's word app
+currently only checked word would be ealapp because eal comes before
+but appeal could also be a combination
+A: when starting a new loop you have to loop from the start and and with an if statement skip if a word already added to localResult variable
