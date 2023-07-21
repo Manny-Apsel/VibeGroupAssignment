@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.33530.505
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VibeGroupAssignment", "VibeGroupAssignment\VibeGroupAssignment.csproj", "{AC66E7FC-051F-47A1-BE52-E05859763836}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VibeGroupAssignmentTests", "VibeGroupAssignmentTests\VibeGroupAssignmentTests.csproj", "{23F0FFF3-170C-4775-ABC6-DDD652C256EE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AC66E7FC-051F-47A1-BE52-E05859763836}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AC66E7FC-051F-47A1-BE52-E05859763836}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AC66E7FC-051F-47A1-BE52-E05859763836}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AC66E7FC-051F-47A1-BE52-E05859763836}.Release|Any CPU.Build.0 = Release|Any CPU
+		{23F0FFF3-170C-4775-ABC6-DDD652C256EE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{23F0FFF3-170C-4775-ABC6-DDD652C256EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{23F0FFF3-170C-4775-ABC6-DDD652C256EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{23F0FFF3-170C-4775-ABC6-DDD652C256EE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {372FE4E3-2C72-4E84-912F-242A84BAC08E}
+	EndGlobalSection
+EndGlobal
