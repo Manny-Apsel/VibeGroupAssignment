@@ -112,6 +112,7 @@ namespace VibeGroupAssignment.Classes
                 {
                     Console.WriteLine($"{String.Join("+", res)} = {String.Join("", res)}");
                 }
+                Console.WriteLine($"There have been {this.Results.Count} results");
             }
             else
             {
