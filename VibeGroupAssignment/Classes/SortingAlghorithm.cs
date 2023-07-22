@@ -49,7 +49,7 @@ namespace VibeGroupAssignment.Classes
                     {
                         if (newCount == this.MaxLength)
                         {
-                            this.Results.Add(new List<string>(localResult));
+                            this.Results.Add(new List<string>(localResult.Reverse()));
 
                         }
                         else
