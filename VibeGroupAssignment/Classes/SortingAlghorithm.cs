@@ -6,24 +6,14 @@ using System.Threading.Tasks;
 
 namespace VibeGroupAssignment.Classes
 {
-    public class SortingAlghorithm
+    public class SortingAlghorithm : Alghorithm
     {
-        public string[] Input { get; }
-        public HashSet<string> AllowedCombinations { get; }
-        public List<List<string>> Results { get; set; } = new List<List<string>>();
-        public byte MaxLength { get; set; }
+        
+        public SortingAlghorithm(string[] input, byte length) : base(input, length) { }
+        
 
-        public SortingAlghorithm(string[] input, byte length)
+        public override void FindCombinations()
         {
-            var delDuplicatesInput = input.Distinct();
-            this.MaxLength = length;
-            this.AllowedCombinations = delDuplicatesInput.Where(x => x.Length == MaxLength).ToHashSet();
-            this.Input = delDuplicatesInput.Where(x => x.Length < MaxLength).ToArray();
-        }
-
-        public void FindCombinations()
-        {
-            //Console.WriteLine($"There's currently {this.Input.Length} distinct entries in Input");
             for (int i = 0; i < Input.Length; i++)
             {
                 var localResult = new Stack<string>();
@@ -111,23 +101,5 @@ namespace VibeGroupAssignment.Classes
             }
             Console.WriteLine("}");
         }
-
-        public void showResults()
-        {
-            Console.WriteLine();
-            if (this.Results.Count > 0)
-            {
-                foreach (var res in this.Results)
-                {
-                    Console.WriteLine($"{String.Join("+", res)} = {String.Join("", res)}");
-                }
-                Console.WriteLine($"There have been {this.Results.Count} results");
-            }
-            else
-            {
-                Console.WriteLine("No results found");
-            }
-        }
-
     }
 }

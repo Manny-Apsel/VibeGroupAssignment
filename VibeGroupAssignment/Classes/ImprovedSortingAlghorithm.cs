@@ -7,22 +7,14 @@ using System.Threading.Tasks;
 
 namespace VibeGroupAssignment.Classes
 {
-    public class ImprovedSortingAlghorithm
+    public class ImprovedSortingAlghorithm : Alghorithm
     {
-        public string[] Input { get; }
-        public HashSet<string> AllowedCombinations { get; }
-        public List<List<string>> Results { get; set; } = new List<List<string>>();
-
-        public ImprovedSortingAlghorithm(string[] input)
-        {
-            this.AllowedCombinations = input.Where(x => x.Length == 6).Distinct().ToHashSet();
-            this.Input = input.Where(x => x.Length < 6).Distinct().ToArray();
-        }
+        public ImprovedSortingAlghorithm(string[] input, byte length) : base(input, length) { }
 
         // first loop should go through all allowed combinations
         // take first combination and have a counter 
 
-        public void FindCombinations()
+        public override void FindCombinations()
         {
             foreach (var item in this.AllowedCombinations)
             {
@@ -64,25 +56,5 @@ namespace VibeGroupAssignment.Classes
                 LoopThroughAllowedCombination(input, posCombo, index, (byte)(length + 1));
             }
         }
-
-        public void showResults()
-        {
-            Console.WriteLine();
-            if (this.Results.Count > 0)
-            {
-                foreach (var res in this.Results)
-                {
-                    Console.WriteLine($"{String.Join("+", res)} = {String.Join("", res)}");
-                }
-                Console.WriteLine($"There have been {this.Results.Count} results");
-            }
-            else
-            {
-                Console.WriteLine("No results found");
-            }
-        }
-
-
-
     }
 }
