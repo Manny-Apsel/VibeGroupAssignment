@@ -26,34 +26,30 @@ namespace VibeGroupAssignment.Classes
             //Console.WriteLine($"There's currently {this.Input.Length} distinct entries in Input");
             for (int i = 0; i < Input.Length; i++)
             {
-                var localResult = new Dictionary<int, string>();
-                localResult.Add(i, Input[i]);
+                var localResult = new Stack<string>();
+                localResult.Push(this.Input[i]);
                 byte count = (byte)(Input[i].Length);
+                
                 LoopThroughLocalInput(count, localResult);
             }
         }
 
-        public void LoopThroughLocalInput(byte count, Dictionary<int, string> localResult)
+        public void LoopThroughLocalInput(byte count, Stack<string> localResult)
         {
             for (int i = 0; i < Input.Length; i++)
             {
-                if (localResult.ContainsKey(i))
-                {
-                    continue;
-                }
-
                 if (count + this.Input[i].Length <= this.MaxLength)
                 {
-                    localResult.Add(i, this.Input[i]);
+                    localResult.Push(this.Input[i]);
 
                     byte newCount = (byte)(count + this.Input[i].Length);
-                    string combinedString = String.Join("", localResult.Values);
+                    string combinedString = combineString(localResult);
 
                     if (CheckIfSubstringExist(combinedString, newCount))
                     {
                         if (newCount == this.MaxLength)
                         {
-                            this.Results.Add(new List<string>(localResult.Values));
+                            this.Results.Add(new List<string>(localResult));
 
                         }
                         else
@@ -70,9 +66,22 @@ namespace VibeGroupAssignment.Classes
                     continue;
                 }
                 // after you've added a result you have to remove last entry and continue the loop
-                localResult.Remove(localResult.Keys.Last());
+                localResult.Pop();
 
             }
+        }
+
+        private string combineString(Stack<string> input)
+        {
+            string output = "";
+
+            foreach (var item in input)
+            {
+                output = item + output;
+
+            }
+
+            return output;
         }
 
         public bool CheckIfSubstringExist(string input, byte count)

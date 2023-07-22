@@ -14,7 +14,7 @@ namespace VibeGroupAssignment.Classes
             string workDir = Directory.GetCurrentDirectory();
             string dirPath = Directory.GetParent(workDir).Parent.Parent.FullName + @"\Wordgame";
             string[] lines = File.ReadAllLines(dirPath + fileName, System.Text.Encoding.UTF8);
-            //lines = lines.Take(1000).ToArray();
+            //lines = lines.Take(150).ToArray();
             return lines;
         }
 

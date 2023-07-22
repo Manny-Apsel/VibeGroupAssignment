@@ -20,11 +20,12 @@ class Program
 
         var SA = new SortingAlghorithm(ReadText.readText(), 6);
         SA.FindCombinations();
-        SA.showResults();
+        //SA.showResults();
 
 
         var ISA = new ImprovedSortingAlghorithm(ReadText.readText());
         ISA.FindCombinations();
-        ISA.showResults();
+        //ISA.showResults();
+
     }
 }
