@@ -34,7 +34,7 @@ namespace VibeGroupAssignment.Classes
                 byte newIndex = (byte)(index + length);
                 byte newLength = 1;
 
-                if (newIndex + newLength > 6)
+                if (newIndex + newLength > this.MaxLength)
                 {
                     var hardCopy = new List<string>();
                     foreach (var item in posCombo)
@@ -51,7 +51,7 @@ namespace VibeGroupAssignment.Classes
                 posCombo.RemoveAt(posCombo.Count - 1);
             }
 
-            if (index + length + 1 <= 6)
+            if (index + length + 1 <= this.MaxLength)
             {
                 LoopThroughAllowedCombination(input, posCombo, index, (byte)(length + 1));
             }
