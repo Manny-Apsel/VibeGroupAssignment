@@ -1,31 +1,33 @@
-﻿using VibeGroupAssignment.Classes;
+﻿using System;
+using VibeGroupAssignment.Classes;
 
 namespace VibeGroupAssignment;
 class Program
 {
     static void Main(string[] args)
     {
-        //byte length;
+        byte length;
 
-        //Console.WriteLine($"Give number for length of word combinations within range {byte.MinValue} and {byte.MaxValue} (default: 6) ");
-        //if (byte.TryParse(Console.ReadLine(), out length))
-        //{
-        //    Console.WriteLine($"Finding results for length {length}");
-        //}
-        //else
-        //{
-        //    Console.WriteLine("No correct number chosen thus default 6 has been chosen");
-        //    length = 6;
-        //}
+        Console.WriteLine($"Give number for length of word combinations within range {byte.MinValue} and {byte.MaxValue} (default: 6) ");
+        if (byte.TryParse(Console.ReadLine(), out length))
+        {
+            Console.WriteLine($"Finding results for length {length}");
+        }
+        else
+        {
+            Console.WriteLine("No correct number chosen thus default 6 has been chosen");
+            length = 6;
+            Console.WriteLine($"Finding results for length {length}");
+        }
 
-        var SA = new SortingAlghorithm(ReadText.readText(), 6);
+        var SA = new SortingAlghorithm(ReadText.readText(), length);
         SA.FindCombinations();
-        //SA.showResults();
+        SA.showResults();
 
 
-        var ISA = new ImprovedSortingAlghorithm(ReadText.readText());
+        var ISA = new ImprovedSortingAlghorithm(ReadText.readText(), length);
         ISA.FindCombinations();
-        //ISA.showResults();
+        ISA.showResults();
 
     }
 }
