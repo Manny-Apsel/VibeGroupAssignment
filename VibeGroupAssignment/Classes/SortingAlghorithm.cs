@@ -44,8 +44,6 @@ namespace VibeGroupAssignment.Classes
                         }
                         else
                         {
-                            //WriteCurrentWordLoop(localResult);
-
                             LoopThroughLocalInput(newCount, localResult);
 
                         }
@@ -85,21 +83,6 @@ namespace VibeGroupAssignment.Classes
                 }
             }
             return false;
-        }
-
-        public void WriteCurrentWordLoop(Dictionary<int, string> localResult)
-        {
-            Console.Write("Currently looping through words { ");
-            foreach (var item in localResult)
-            {
-                Console.Write($"{item.Value} ");
-            }
-            Console.Write("} with index {");
-            foreach (var item in localResult)
-            {
-                Console.Write($"{item.Key} ");
-            }
-            Console.WriteLine("}");
         }
     }
 }
